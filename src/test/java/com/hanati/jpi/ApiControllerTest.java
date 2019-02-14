@@ -1,6 +1,9 @@
+package com.hanati.jpi;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -13,7 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ApiController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
 public class ApiControllerTest {
 
     String apiId="apiId1";
@@ -22,8 +26,8 @@ public class ApiControllerTest {
     MockMvc mockMvc;
 
     @Test
-    public void apiCall() throws Exception {
-        mockMvc.perform(get("/api" + apiId))
+    public void apiCallTest() throws Exception {
+        mockMvc.perform(get("/api/call/" + apiId))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(apiId));
