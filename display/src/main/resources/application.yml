@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: display
+
+# 타임아웃 조건
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 # 타임아웃 시간, df:2000
+      circuitBreaker:
+        requestVolumeThreshold: 1 # 타임아웃 호출 개수, df:20
+        errorThresholdPercentage: 50  #타임아웃 퍼센티지, default 50
+        sleepWindowInMilliseconds: 10000 #타임아웃 연장 단위 : default 5000
