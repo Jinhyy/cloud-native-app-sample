@@ -18,7 +18,7 @@ public class DisplayController {
     @GetMapping(path = "/{displayId}")
     public String getDisplayDetail(@PathVariable String displayId) {
         String productInfo = productInfoService.getProductInfo(displayId);
-        return String.format("[display id = %s at %s %s with name : %s ]", displayId, System.currentTimeMillis(),
-                productInfo, productInfoService.getProductName(productInfo));
+        return String.format("[display id = %s at %s %s ]", displayId, System.currentTimeMillis(),
+                productInfo);
     }
 }

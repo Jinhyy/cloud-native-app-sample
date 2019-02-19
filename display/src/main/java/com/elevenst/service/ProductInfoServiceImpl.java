@@ -2,14 +2,20 @@ package com.elevenst.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ProductInfoServiceImpl implements ProductInfoService {
+
+
+    private final String url= "http://product/products/";
 
     @Autowired
     RestTemplate restTemplate;
@@ -28,13 +34,13 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         }
     */
 
-        throw new RuntimeException("runtime error");
-        //return restTemplate.getForObject("http://localhost:8082/products/" + productId,String.class);
+        //throw new RuntimeException("runtime error");
+        return restTemplate.getForObject(url + productId,String.class);
     }
 
     @Override
     public String getProductName(String productId) {
-        return restTemplate.getForObject("http://localhost:8082/products/name/" + productId,String.class);
+        return restTemplate.getForObject(url + productId,String.class);
     }
 
     public String getProductInfoFallback(String productId, Throwable t){

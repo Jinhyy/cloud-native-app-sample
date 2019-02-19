@@ -1,5 +1,7 @@
 package com.elevenst.controller.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController {
 
+    @Autowired
+    Environment environment;
+
     @GetMapping("/{productId}")
     public String getProduct(@PathVariable String productId){
+        System.out.println("current server port : " + environment.getProperty("local.server.port"));
         return "product id = " + productId +
                 " at "  + System.currentTimeMillis();
     }
