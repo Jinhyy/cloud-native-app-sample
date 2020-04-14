@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  discovery:
+    build: discovery
+    environment:
+      - java.security.egd=file:/dev/./urandom
+      - "SPRING_PROFILES_ACTIVE=local"
+    ports:
+      - "23001:23001"
+    expose:
+      - "23001"
+
+  product:
+    build: product
+    environment:
+      - "java.security.egd=file:/dev/./urandom"
+      - "server.contextPath=/product"
+      - "spring.profiles.active=local"
+    ports:
+      - "24002:24002"
+    expose:
+      - "24002"
+    depends_on:
+      - discovery
+
+  display:
+    build: display
+    environment:
+      - java.security.egd=file:/dev/./urandom
+      - server.contextPath=/display
+      - "SPRING_PROFILES_ACTIVE=local"
+    ports:
+      - "24001:24001"
+    expose:
+      - "24001"
+    depends_on:
+      - discovery
