@@ -6,5 +6,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.8')
+    // https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+    compile group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.0.4'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
