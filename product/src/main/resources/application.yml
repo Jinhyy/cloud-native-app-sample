@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: product
+  profiles:
+    active: wlocal
 
 eureka:
   instance:

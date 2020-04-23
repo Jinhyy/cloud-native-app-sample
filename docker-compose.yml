@@ -1,16 +1,56 @@
 version: '3.7'
 services:
+#  elk:
+#    image: sebp/elk:671
+#    container_name: elk
+#    ports:
+#      - "5601:5601"   # kibana
+#      - "9200:9200"   # es
+#      - "5044:5044"   # logstash
+#    environment:
+#      - ES_JAVA_OPTS=-Xms1g -Xmx2g
+#      - ES_CONNECT_RETRY=50
+
+#  zipkin:
+#    image: openzipkin/zipkin
+#    container_name: zipkin
+#    environment:
+#      - STORAGE_TYPE=elasticsearch
+#      - ES_HOSTS=elk:9200
+#    ports:
+#      - "9411:9411"
+#    depends_on:
+#      - elk
+
+  maria:
+    image: mariadb:10.1.30
+    container_name: "mariadb"
+    ports:
+      - "3306:3306"
+    volumes:
+#      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/my.cnf:/etc/mysql/my.cnf
+      - ./mariadb/init:/docker-entrypoint-initdb.d/:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=jinhyun
+      - TZ="Asia/Seoul"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
   prometheus:
-    image: prom/prometheus:v2.16.0
+    image: prom/prometheus:v2.5.0
+    container_name: "prom"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  # prometheus config volume
     ports:
       - "9090:9090"
     expose:
       - "9090"
+    depends_on:
+      - discovery
 
   discovery:
     build: discovery
+    container_name: "eureka"
     environment:
       - java.security.egd=file:/dev/./urandom
       - "SPRING_PROFILES_ACTIVE=local"
@@ -21,6 +61,7 @@ services:
 
   product:
     build: product
+    container_name: "sv-prd"
     environment:
       - "java.security.egd=file:/dev/./urandom"
       - "server.contextPath=/product"
@@ -34,6 +75,7 @@ services:
 
   display:
     build: display
+    container_name: "sv-display"
     environment:
       - java.security.egd=file:/dev/./urandom
       - server.contextPath=/display

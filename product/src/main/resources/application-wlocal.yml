@@ -1,18 +1,13 @@
 server:
-  port: 24002
+  port: 24003
 
 spring:
   application:
     name: product
-  sleuth:
-    sampler:
-      probability: 1.0  # 100% sampling
-  zipkin:
-    base-url: http://zipkin:9411
   datasource:
     hikari:
       driver: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://mariadb:3306/mydb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      jdbc-url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&characterEncoding=utf-8
       username: root
       password: jinhyun
 
@@ -25,7 +20,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery:23001/eureka/
+      defaultZone: http://localhost:23001/eureka/
       enabled: true
 
 management:

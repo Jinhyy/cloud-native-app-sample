@@ -1,5 +1,6 @@
 package com.jinhyy;
 
+import com.netflix.config.ConfigurationManager;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +28,17 @@ public class EurekaServer {
                     .and().csrf().disable();
         }
     }
-
-    @Bean
-    MeterRegistryCustomizer<MeterRegistry> configurer(
-            @Value("${spring.application.name}") String applicationName) {
-        return (registry) -> registry.config().commonTags("application", applicationName);
-    }
+//
+//    @Bean
+//    MeterRegistryCustomizer<MeterRegistry> configurer(
+//            @Value("${spring.application.name}") String applicationName) {
+//        return (registry) -> registry.config().commonTags("application", applicationName);
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaServer.class, args);
+        String dataCenter = ConfigurationManager.getConfigInstance().getString("archaius.deployment.datacenter");
+        logger.info("★ dataCenter: {}", dataCenter);
+        System.out.println("☆ dataCenter: " +  dataCenter);
     }
 }
