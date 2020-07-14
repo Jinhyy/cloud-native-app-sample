@@ -6,5 +6,5 @@ dependencies {
     compile 'io.micrometer:micrometer-registry-prometheus'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     // https://mvnrepository.com/artifact/at.twinformatics/eureka-consul-adapter
-    compile group: 'at.twinformatics', name: 'eureka-consul-adapter', version: '1.4.0'
+    compile group: 'at.twinformatics', name: 'eureka-consul-adapter', version: '1.4.0' 
 }
