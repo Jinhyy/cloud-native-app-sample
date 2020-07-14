@@ -62,13 +62,19 @@ scrape_configs:
         type: 'A'
         port: 9100
 
-  - job_name: 'eureka-metrics'
-    scheme: http
+  - job_name: 'spring-boot-metrics'
     metrics_path: '/actuator/prometheus'
-    consul_sd_configs:
-      - server: 'discovery:23001'
-        scheme: http
-        services: [EUREKA, DISPLAY, PRODUCT]
+    static_configs:
+      - targets: ['discovery:23001']
+
+#  - job_name: 'eureka-metrics'
+#    scheme: http
+#    metrics_path: '/actuator/prometheus'
+#    consul_sd_configs:
+#      - server: 'discovery:23001'
+#        scheme: http
+#        services: [EUREKA, DISPLAY, PRODUCT]
+
 #  - job_name: 'eureka'
 #    scrape_interval: 20s
 #    static_configs:

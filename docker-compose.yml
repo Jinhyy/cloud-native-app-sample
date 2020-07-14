@@ -48,6 +48,14 @@ services:
     depends_on:
       - discovery
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: "grafana"
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+
   discovery:
     build: discovery
     container_name: "eureka"
