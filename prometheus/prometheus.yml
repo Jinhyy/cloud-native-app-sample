@@ -11,7 +11,7 @@ global:
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
-  - 'alert.rules'
+  - 'alert.rules.yml'
   # - "first.rules"
   # - "second.rules"
 
@@ -61,6 +61,11 @@ scrape_configs:
           - 'tasks.node-exporter'
         type: 'A'
         port: 9100
+
+  - job_name: 'discovery-metrics'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['discovery:23001']
 
   - job_name: 'spring-boot-metrics'
     metrics_path: '/actuator/prometheus'
