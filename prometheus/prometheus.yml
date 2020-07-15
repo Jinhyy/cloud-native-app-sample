@@ -65,7 +65,7 @@ scrape_configs:
   - job_name: 'spring-boot-metrics'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['discovery:23001']
+      - targets: ['discovery:23001', 'sv-display:24001', 'sv-prd:24002']
 
 #  - job_name: 'eureka-metrics'
 #    scheme: http

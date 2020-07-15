@@ -37,8 +37,8 @@ public class EurekaServer {
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaServer.class, args);
-        String dataCenter = ConfigurationManager.getConfigInstance().getString("archaius.deployment.datacenter");
-        logger.info("★ dataCenter: {}", dataCenter);
-        System.out.println("☆ dataCenter: " +  dataCenter);
+//        String dataCenter = ConfigurationManager.getConfigInstance().getString("archaius.deployment.datacenter");
+//        logger.info("★ dataCenter: {}", dataCenter);
+//        System.out.println("☆ dataCenter: " +  dataCenter);
     }
 }

@@ -1,10 +1,10 @@
 dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
-    compile('de.codecentric:spring-boot-admin-starter-client:2.0.1')
+//    compile('de.codecentric:spring-boot-admin-starter-client:2.0.1')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile 'io.micrometer:micrometer-registry-prometheus'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     // https://mvnrepository.com/artifact/at.twinformatics/eureka-consul-adapter
-    compile group: 'at.twinformatics', name: 'eureka-consul-adapter', version: '1.4.0'
+//    compile group: 'at.twinformatics', name: 'eureka-consul-adapter', version: '1.4.0'
 }

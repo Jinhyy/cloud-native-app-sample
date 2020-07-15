@@ -27,6 +27,8 @@ services:
     container_name: "mariadb"
     ports:
       - "3306:3306"
+    expose:
+      - "3306"
     volumes:
 #      - ./mariadb/data:/var/lib/mysql
       - ./mariadb/my.cnf:/etc/mysql/my.cnf
@@ -61,7 +63,8 @@ services:
     container_name: "eureka"
     environment:
       - java.security.egd=file:/dev/./urandom
-      - "SPRING_PROFILES_ACTIVE=local"
+      - server.contextPath=/discovery
+      - spring.profiles.active=local
     ports:
       - "23001:23001"
     expose:
@@ -70,10 +73,12 @@ services:
   product:
     build: product
     container_name: "sv-prd"
+    stdin_open: true
+    tty: true
     environment:
-      - "java.security.egd=file:/dev/./urandom"
-      - "server.contextPath=/product"
-      - "spring.profiles.active=local"
+      - java.security.egd=file:/dev/./urandom
+      - server.contextPath=/product
+      - spring.profiles.active=local
     ports:
       - "24002:24002"
     expose:
@@ -87,7 +92,7 @@ services:
     environment:
       - java.security.egd=file:/dev/./urandom
       - server.contextPath=/display
-      - "SPRING_PROFILES_ACTIVE=local"
+      - spring.profiles.active=local
     ports:
       - "24001:24001"
     expose:
